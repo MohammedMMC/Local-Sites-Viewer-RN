@@ -1,14 +1,27 @@
 import { Colors } from "@/constants/Colors";
-import { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View, FlatList } from "react-native";
+import { useEffect, useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View, FlatList, Platform, Alert, Linking } from "react-native";
 import * as Network from 'expo-network';
+import * as WebBrowser from 'expo-web-browser';
+
+const openAppBrowser = async (url: string, isInternal: boolean) => {
+  try {
+    if (!isInternal) {
+      await Linking.openURL(url);
+    } else {
+      await WebBrowser.openBrowserAsync(url, {
+        showTitle: true,
+        toolbarColor: Colors.primary,
+        secondaryToolbarColor: Colors.primaryDarker
+      });
+    }
+  } catch (error) {
+    Alert.alert("Error", "Connot open the URL!")
+  }
+}
 
 export default function Index() {
-  const [hosts, setHosts] = useState([
-    new HostData("192.168.1.1"),
-    new HostData("192.168.1.1"),
-    new HostData("192.168.1.1")
-  ]);
+  const [hosts, setHosts] = useState<HostData[]>([]);
   const [loadingPercent, setLoadingPercent] = useState(0);
   const [isScanning, setIsScanning] = useState(false);
   const [ports, setPorts] = useState([80, 5500, 3300, 5050, 3030, 8080, 8081, 8082]);
@@ -34,9 +47,14 @@ export default function Index() {
       const ips2Check = Array.from({ length: 255 }, (_, i) => `${baseIP}.${i}`);
       const scanned: HostData[] = [];
 
-      for (let i = 0; i < ips2Check.length; i += 255 / (ports.length + 1)) {
-        setLoadingPercent(Math.round((i / 250) * 100));
-        const ipsBatch = ips2Check.slice(i, i + 255 / (ports.length + 1));
+      const packetsCount = 60 / (ports.length + 1);
+
+      for (let i = 0; i < ips2Check.length; i += packetsCount) {
+        setLoadingPercent(Math.floor((i / 255) * 100));
+        setHosts(scanned);
+        await new Promise(resolve => setTimeout(resolve, 10));
+
+        const ipsBatch = ips2Check.slice(i, i + packetsCount);
         scanned.push(...(await Promise.all(
           ipsBatch.map(addr =>
             Promise.all(ports.map(port =>
@@ -49,13 +67,8 @@ export default function Index() {
             ))
           )
         )).flat().filter(ip => ip instanceof HostData));
-
-        console.log(ipsBatch, scanned);
-
-        await new Promise(resolve => setTimeout(resolve, 100));
       }
 
-      console.log(scanned);
       setHosts(scanned);
     } catch (error) {
       console.error("Error scanning network:", error);
@@ -84,10 +97,10 @@ export default function Index() {
             flexDirection: "row",
             gap: "3%"
           }}>
-            <TouchableOpacity style={cardsStyle.button}>
+            <TouchableOpacity onPress={() => openAppBrowser("http://" + item.ip, false)} style={cardsStyle.button}>
               <Text style={cardsStyle.buttonText}>External</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={cardsStyle.button}>
+            <TouchableOpacity onPress={() => openAppBrowser("http://" + item.ip, true)} style={cardsStyle.button}>
               <Text style={cardsStyle.buttonText}>Internal</Text>
             </TouchableOpacity>
           </View>
