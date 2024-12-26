@@ -1,4 +1,5 @@
 import { Colors } from "@/constants/Colors";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useRef, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, FlatList, Platform, Alert, Linking, Modal, TouchableWithoutFeedback, ToastAndroid, TextInput } from "react-native";
 import * as Network from 'expo-network';
@@ -20,13 +21,39 @@ const openAppBrowser = async (url: string, isInternal: boolean) => {
   }
 }
 
+const savePorts = async (ports: string[]) => {
+  try {
+    await AsyncStorage.setItem("ports", JSON.stringify(ports));
+  } catch (e) {
+    ToastAndroid.show("Connot save the ports!", ToastAndroid.SHORT);
+  }
+}
+
+const loadPorts = async (): Promise<string[]> => {
+  try {
+    const ports = await AsyncStorage.getItem("ports");
+    return ports ? JSON.parse(ports) : ["+ Add", "80"];
+  } catch (e) {
+    return ["+ Add", "80"];
+  }
+}
+
+const removePort = async (port: string) => {
+  try {
+    const ports = await loadPorts();
+    await savePorts(ports.filter(p => p !== port));
+  } catch (e) {
+    ToastAndroid.show("Connot remove the port!", ToastAndroid.SHORT);
+  }
+}
+
 export default function Index() {
   const [hosts, setHosts] = useState<HostData[]>([]);
   const [loadingPercent, setLoadingPercent] = useState(0);
   const [isScanning, setIsScanning] = useState(false);
   const stopScanning = useRef(false);
   const [modals, setModals] = useState({ removePort: false, addPort: false });
-  const [ports, setPorts] = useState<(number | string)[]>(["+ Add", 80, 5500, 5501, 5050]);
+  const [ports, setPorts] = useState<string[]>(["+ Add", "80"]);
   const [port2ra, setPort2ra] = useState<null | number | string>(null);
 
   const hideAllModals = () => {
@@ -81,7 +108,7 @@ export default function Index() {
         )).flat().filter(ip => ip instanceof HostData));
       }
 
-      if (stopScanning.current) scanned = [];
+      // if (!stopScanning.current) scanned = [];
       setHosts(scanned);
     } catch (error) {
       console.error("Error scanning network:", error);
@@ -91,6 +118,17 @@ export default function Index() {
       setIsScanning(false);
     }
   }
+
+  useEffect(() => {
+    const loadSavedPorts = async () => {
+      const savedPorts = await loadPorts();
+      setPorts(savedPorts);
+    };
+    loadSavedPorts();
+  }, []);
+  useEffect(() => {
+    savePorts(ports);
+  }, [ports]);
 
   return (
     <View style={styles.body}>

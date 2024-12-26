@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "LocalSitesViewer",
-    "slug": "LocalSitesViewer",
-    "version": "1.0.0",
+    "slug": "localsitesviewer",
+    "version": "2.2.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -14,8 +14,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#131a1f"
+      },
+      "package": "tr.com.mohamed.loaclsitesviewer"
     },
     "web": {
       "bundler": "metro",
@@ -30,12 +31,20 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#131a1f"
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "aaa55508-8bdd-4883-8ef0-676dee255ebb"
+      }
     }
   }
 }
