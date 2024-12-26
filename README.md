@@ -7,9 +7,8 @@ Instead of typing your IP and port every time, this app does it for you. It dete
 scans active ports, and shows you a list of working local sites.
 
 #### Preview
-<img src="https://github.com/MohammedMMC/Local-Sites-Viewer-RN/blob/main/preview.jpg?raw=true" alt="Preview Image" width="300"/>
-<img src="https://github.com/MohammedMMC/Local-Sites-Viewer-RN/blob/main/preview2.jpg?raw=true" alt="Preview Image" width="300"/>
-<img src="https://github.com/MohammedMMC/Local-Sites-Viewer-RN/blob/main/preview3.jpg?raw=true" alt="Preview Image" width="300"/>
+
+![Preview Image](https://github.com/MohammedMMC/Local-Sites-Viewer-RN/blob/main/preview.jpg?raw=true)
 
 ## How It Works
 
@@ -21,7 +20,7 @@ scans active ports, and shows you a list of working local sites.
 ## Example Output
 
 If your local IP is `192.168.1.10` and ports `3000, 8000, 8080` are scanned:
-*(it scans for all the IPs that same as your local ip: 192.168.1.\*)*
+_(it scans for all the IPs that same as your local ip: 192.168.1.\*)_
 
 ```
 Local Sites Found:
