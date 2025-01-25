@@ -2,7 +2,7 @@
   "expo": {
     "name": "Local Sites Viewer",
     "slug": "localsitesviewer",
-    "version": "2.2.4",
+    "version": "3.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -10,14 +10,14 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "tr.com.mohamed.loaclsitesviewer"
+      "bundleIdentifier": "tr.com.mohamed.localsitesviewer"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#131a1f"
       },
-      "package": "tr.com.mohamed.loaclsitesviewer"
+      "package": "tr.com.mohamed.localsitesviewer"
     },
     "web": {
       "bundler": "metro",

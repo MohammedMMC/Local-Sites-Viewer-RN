@@ -10,13 +10,14 @@ export default function RootLayout() {
         },
         headerTitleAlign: "center",
         headerTintColor: Colors.background,
-        navigationBarColor: Colors.primaryDarker,
-        statusBarBackgroundColor: Colors.primaryDarker,
+        navigationBarColor: Colors.primary,
+        statusBarBackgroundColor: Colors.primary,
         headerTitleStyle: {
           fontWeight: 700
         },
         title: "Local Sites Viewer",
       }}>
+        <Stack.Screen name="(tabs)" />
     </Stack>
   );
 }

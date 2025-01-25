@@ -29,6 +29,32 @@ Local Sites Found:
 3. http://192.168.1.23:8080
 ```
 
+## Pages
+
+### Home
+- Main screen for scanning local network
+- Shows list of discovered local sites
+- Options to open sites externally or in-app
+
+### Bookmarks
+- Add custom sites with name, IP, and port
+- Quick access to saved sites
+
+### Ports
+- Manage ports to scan
+- Add single or multiple ports
+- Default port: 80
+
+### Settings
+- Adjust search speed
+- Configure IP range for scanning
+- Toggle automatic loading at startup
+
+### About
+- App information and description
+- How the app works
+- License information
+
 ## Contributions
 
 Feel free to contribute! Submit issues, suggestions, or pull requests to improve the app.
