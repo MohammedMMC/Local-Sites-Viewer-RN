@@ -54,10 +54,10 @@ export default function BookmarksScreen() {
               flexDirection: "row",
               gap: "3%"
             }}>
-              <TouchableOpacity onPress={() => openAppBrowser("http://" + item.ip, false)} style={cardsStyle.button}>
+              <TouchableOpacity onPress={() => openAppBrowser("http://" + item.ip + ":" + item.port, false)} style={cardsStyle.button}>
                 <Text style={cardsStyle.buttonText}>External</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => openAppBrowser("http://" + item.ip, true)} style={cardsStyle.button}>
+              <TouchableOpacity onPress={() => openAppBrowser("http://" + item.ip + ":" + item.port, true)} style={cardsStyle.button}>
                 <Text style={cardsStyle.buttonText}>Internal</Text>
               </TouchableOpacity>
             </View>
