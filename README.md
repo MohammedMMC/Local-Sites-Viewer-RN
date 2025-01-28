@@ -8,7 +8,7 @@ scans active ports, and shows you a list of working local sites.
 
 #### Preview
 
-![Preview Image](https://github.com/MohammedMMC/Local-Sites-Viewer-RN/blob/main/preview.png?raw=true)
+![Preview Image](https://github.com/MohammedMMC/Local-Sites-Viewer-RN/blob/main/preview.jpg?raw=true)
 
 ## How It Works
 
