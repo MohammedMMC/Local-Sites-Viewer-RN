@@ -10,14 +10,14 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "tr.com.mohamed.localsitesviewer"
+      "bundleIdentifier": "tr.com.mohamed.apps.localsitesviewer"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#131a1f"
       },
-      "package": "tr.com.mohamed.localsitesviewer"
+      "package": "tr.com.mohamed.apps.localsitesviewer"
     },
     "web": {
       "bundler": "metro",
